@@ -1,4 +1,3 @@
-```md
 # Proyecto: Pokédex con MySQL y Docker (Portainer)
 
 ## Descripción general
