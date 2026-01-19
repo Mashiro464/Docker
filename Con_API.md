@@ -43,7 +43,7 @@ La aplicación realiza peticiones HTTP mediante `fetch` directamente desde el na
 
 ## 4. Estructura del proyecto
 
-```text
+```
 pokedex/
 ├── index.html
 ├── css/
@@ -51,6 +51,7 @@ pokedex/
 ├── js/
 │   └── app.js
 └── docker-compose.yml
+```
 Descripción de los archivos
 index.html: estructura principal de la web.
 
