@@ -32,7 +32,7 @@ Todos los servicios se orquestan mediante Docker Compose.
     ## Objetivos del proyecto
 El objetivo principal del proyecto es desplegar una aplicación web funcional conectada a una base de datos relacional, utilizando contenedores Docker y herramientas de orquestación.
 
-Objetivos específicos:
+### Objetivos específicos:
 - Desplegar una base de datos MySQL en un contenedor Docker.
 - Desarrollar una aplicación web PHP que consulte datos desde MySQL.
 - Utilizar volúmenes Docker para garantizar la persistencia de los datos.
