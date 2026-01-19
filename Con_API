@@ -1,48 +1,49 @@
-INFORME
-Montaje de una Aplicación Web basada en API usando Docker y Portainer
-1. Introducción
+# INFORME  
+## Montaje de una Aplicación Web basada en API usando Docker y Portainer
 
-El objetivo de este proyecto es desplegar una aplicación web que consume datos de una API externa, concretamente la PokéAPI, utilizando contenedores Docker gestionados mediante Portainer.
+---
+
+## 1. Introducción
+El objetivo de este proyecto es desplegar una aplicación web que consume datos de una API externa, concretamente la **PokéAPI**, utilizando contenedores Docker gestionados mediante **Portainer**.
+
 La aplicación permite visualizar información de Pokémon sin necesidad de una base de datos local, ya que los datos se obtienen dinámicamente desde la API.
 
 Este enfoque es habitual en aplicaciones modernas, ya que reduce la complejidad del backend y facilita el mantenimiento.
 
-2. Tecnologías utilizadas
+---
 
-Docker: plataforma de contenedores
+## 2. Tecnologías utilizadas
+Las tecnologías empleadas en el proyecto son las siguientes:
 
-Portainer: interfaz web para la gestión de Docker
+- **Docker**: plataforma de contenedores.
+- **Portainer**: interfaz web para la gestión de Docker.
+- **Nginx**: servidor web.
+- **HTML / CSS / JavaScript**: frontend de la aplicación.
+- **PokéAPI**: API REST pública con información de Pokémon.
+- **GitHub**: repositorio del proyecto.
 
-Nginx: servidor web
+---
 
-HTML / CSS / JavaScript: frontend de la aplicación
+## 3. API utilizada: PokéAPI
+La aplicación consume datos de la API pública **PokéAPI**, cuyas características son:
 
-PokéAPI: API REST pública con información de Pokémon
+- **URL**: https://pokeapi.co  
+- **Tipo**: API REST pública  
+- **Formato de datos**: JSON  
 
-GitHub: repositorio del proyecto
+### Información obtenida
+- Nombre del Pokémon
+- Tipos
+- Imagen
+- Estadísticas básicas
 
-3. API utilizada
-PokéAPI
+La aplicación realiza peticiones HTTP mediante `fetch` directamente desde el navegador.
 
-URL: https://pokeapi.co
+---
 
-Tipo: API REST pública
+## 4. Estructura del proyecto
 
-Formato de datos: JSON
-
-Información obtenida:
-
-Nombre del Pokémon
-
-Tipos
-
-Imagen
-
-Estadísticas básicas
-
-La aplicación realiza peticiones HTTP (fetch) directamente a la API desde el navegador.
-
-4. Estructura del proyecto
+```text
 pokedex/
 ├── index.html
 ├── css/
@@ -50,20 +51,20 @@ pokedex/
 ├── js/
 │   └── app.js
 └── docker-compose.yml
+Descripción de los archivos
+index.html: estructura principal de la web.
 
+styles.css: diseño visual de la aplicación.
 
-index.html: estructura principal de la web
+app.js: lógica JavaScript para consumir la API.
 
-app.js: lógica para consumir la API
-
-styles.css: diseño visual
-
-docker-compose.yml: definición del contenedor Nginx
+docker-compose.yml: definición del contenedor Nginx.
 
 5. Docker Compose
-
 Se utiliza un único servicio con Nginx para servir la aplicación web.
 
+yaml
+Copiar código
 version: "3.8"
 
 services:
@@ -75,70 +76,73 @@ services:
     volumes:
       - ./pokedex:/usr/share/nginx/html:ro
     restart: unless-stopped
-
-
 Este archivo permite:
 
-Levantar un contenedor Nginx
+Levantar un contenedor Nginx.
 
-Publicar la web en el puerto 8080
+Publicar la web en el puerto 8080.
 
-Servir archivos estáticos del proyecto
+Servir archivos estáticos del proyecto.
 
 6. Despliegue en Portainer
+El despliegue del proyecto se realiza siguiendo estos pasos:
 
-Acceso a Portainer mediante navegador
+Acceso a Portainer desde el navegador.
 
-Creación de un nuevo Stack
+Creación de un nuevo Stack.
 
-Pegado del archivo docker-compose.yml
+Pegado del archivo docker-compose.yml.
 
-Despliegue del stack
+Despliegue del stack.
 
-Verificación de que el contenedor está en estado Running
+Verificación de que el contenedor está en estado Running.
 
 7. Funcionamiento de la aplicación
+El funcionamiento de la aplicación es el siguiente:
 
-El usuario accede a la web desde el navegador
+El usuario accede a la web desde el navegador.
 
-JavaScript realiza peticiones a la PokéAPI
+JavaScript realiza peticiones a la PokéAPI.
 
-La API devuelve datos en formato JSON
+La API devuelve los datos en formato JSON.
 
-Los datos se muestran dinámicamente en pantalla
+Los datos se muestran dinámicamente en pantalla.
 
-No se almacena información localmente
+No se almacena información localmente.
 
 8. Pruebas realizadas
+Durante el desarrollo se realizaron las siguientes pruebas:
 
-Acceso correcto a la web desde el navegador
+Acceso correcto a la web desde el navegador.
 
-Carga correcta de datos desde la API
+Carga correcta de datos desde la API.
 
-Visualización de imágenes de Pokémon
+Visualización de imágenes de Pokémon.
 
-Funcionamiento sin base de datos
+Funcionamiento sin base de datos.
 
-Persistencia del servicio tras reinicio del contenedor
+Persistencia del servicio tras reinicio del contenedor.
 
-9. Ventajas del uso de API
+9. Ventajas del uso de una API
+El uso de una API externa presenta varias ventajas:
 
-No es necesario gestionar base de datos
+No es necesario gestionar una base de datos.
 
-Datos siempre actualizados
+Los datos están siempre actualizados.
 
-Menor complejidad del backend
+Menor complejidad del backend.
 
-Escalabilidad sencilla
+Escalabilidad sencilla.
 
-Ideal para proyectos de demostración y aprendizaje
+Ideal para proyectos de demostración y aprendizaje.
 
 10. Problemas encontrados y soluciones
 Problema	Solución
-Puerto ocupado	Cambio de puerto en docker-compose
+Puerto ocupado	Cambio de puerto en docker-compose.yml
 No cargaban datos	Verificación de la URL de la API
-Error de permisos	Uso correcto de volúmenes de solo lectura
-11. Conclusión
+Error de permisos	Uso correcto de volúmenes en modo lectura
 
+11. Conclusión
 El proyecto demuestra cómo desplegar una aplicación web moderna basada en una API externa utilizando Docker y Portainer.
+
 Este enfoque es eficiente, escalable y muy utilizado en entornos reales de desarrollo, especialmente cuando no se requiere almacenamiento local de datos.
