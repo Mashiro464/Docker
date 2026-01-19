@@ -19,14 +19,14 @@ Todos los servicios se orquestan mediante Docker Compose.
 ---
 
 ## Estructura del proyecto
-
+'''
 /opt/pokemon-mysql
 ├── docker-compose.yml
 ├── Dockerfile
 ├── db/
 │   └── init.sql
 └── www/
-    └── index.php
+    └── index.php'''
 
     ## Objetivos del proyecto
 El objetivo principal del proyecto es desplegar una aplicación web funcional conectada a una base de datos relacional, utilizando contenedores Docker y herramientas de orquestación.
