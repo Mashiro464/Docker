@@ -28,13 +28,7 @@ Todos los servicios se orquestan mediante Docker Compose.
 └── www/
     └── index.php
 ```
-
-
-
-
-
-
-
+---
     ## Objetivos del proyecto
 El objetivo principal del proyecto es desplegar una aplicación web funcional conectada a una base de datos relacional, utilizando contenedores Docker y herramientas de orquestación.
 
