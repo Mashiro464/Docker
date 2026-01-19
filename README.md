@@ -20,7 +20,6 @@ Todos los servicios se orquestan mediante Docker Compose.
 
 ## Estructura del proyecto
 
-```text
 /opt/pokemon-mysql
 ├── docker-compose.yml
 ├── Dockerfile
