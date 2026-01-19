@@ -28,6 +28,9 @@ Todos los servicios se orquestan mediante Docker Compose.
 │   └── init.sql
 └── www/
     └── index.php
+
+---
+
 Contenedores utilizados
 Servicio	Imagen utilizada
 Base de datos	mysql:8.0
