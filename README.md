@@ -1,6 +1,3 @@
-### 3️⃣ Pega ESTE README COMPLETO (YA CORRECTO)
-Copia **desde aquí hasta el final**, sin añadir nada más:
-
 ```md
 # Proyecto: Pokédex con MySQL y Docker (Portainer)
 
