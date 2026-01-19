@@ -1,141 +1,116 @@
-# INFORME  
-## Montaje de una Aplicación Web basada en API usando Docker y Portainer
+Proyecto: Pokédex con MySQL y Docker (Portainer)
+Descripción general
 
----
+Este proyecto consiste en el despliegue de una aplicación web Pokédex conectada a una base de datos MySQL real, utilizando contenedores Docker y gestionado mediante Portainer.
 
-## 1. Introducción
-El objetivo de este proyecto es desplegar una aplicación web que consume datos de una API externa, concretamente la **PokéAPI**, utilizando contenedores Docker gestionados mediante **Portainer**.
+La aplicación muestra un listado de Pokémon almacenados en una base de datos MySQL, demostrando el uso de contenedores, volúmenes persistentes y comunicación entre servicios.
 
-La aplicación permite visualizar información de Pokémon sin necesidad de una base de datos local, ya que los datos se obtienen dinámicamente desde la API.
+Arquitectura del proyecto
 
-Este enfoque es habitual en aplicaciones modernas, ya que reduce la complejidad del backend y facilita el mantenimiento.
+El sistema está compuesto por tres servicios principales:
 
----
+MySQL 8.0 como sistema gestor de base de datos
 
-## 2. Tecnologías utilizadas
-Las tecnologías empleadas en el proyecto son las siguientes:
+Aplicación web PHP con Apache
 
-- **Docker**: plataforma de contenedores.
-- **Portainer**: interfaz web para la gestión de Docker.
-- **Nginx**: servidor web.
-- **HTML / CSS / JavaScript**: frontend de la aplicación.
-- **PokéAPI**: API REST pública con información de Pokémon.
-- **GitHub**: repositorio del proyecto.
+phpMyAdmin para la administración de la base de datos
 
----
+Todos los servicios se orquestan mediante Docker Compose.
 
-## 3. API utilizada: PokéAPI
-La aplicación consume datos de la API pública **PokéAPI**, cuyas características son:
+Estructura del proyecto
+/opt/pokemon-mysql
+├── docker-compose.yml
+├── Dockerfile
+├── db/
+│   └── init.sql
+└── www/
+    └── index.php
 
-- **URL**: https://pokeapi.co  
-- **Tipo**: API REST pública  
-- **Formato de datos**: JSON  
+Objetivos del proyecto
 
-### Información obtenida
-- Nombre del Pokémon
-- Tipos
-- Imagen
-- Estadísticas básicas
+El objetivo principal del proyecto es desplegar una aplicación web funcional conectada a una base de datos relacional utilizando contenedores Docker y herramientas de orquestación.
 
-La aplicación realiza peticiones HTTP mediante `fetch` directamente desde el navegador.
+Objetivos específicos
 
----
+Desplegar una base de datos MySQL en un contenedor Docker.
 
-## 4. Estructura del proyecto
+Desarrollar una aplicación web PHP que consulte datos desde MySQL.
 
-```
-pokedex/
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── app.js
-└── docker-compose.yml
-```
----
+Utilizar volúmenes Docker para garantizar la persistencia de los datos.
 
-## 5. Docker Compose
-Se utiliza un único servicio con **Nginx** para servir la aplicación web.
+Gestionar el despliegue mediante Portainer.
 
-```yaml
-version: "3.8"
+Documentar el proceso y las incidencias encontradas.
 
-services:
-  web:
-    image: nginx:alpine
-    container_name: pokedex_web
-    ports:
-      - "8080:80"
-    volumes:
-      - ./pokedex:/usr/share/nginx/html:ro
-    restart: unless-stopped
-Este archivo permite:
+Tecnologías utilizadas
+Tecnología	Descripción
+Docker	Plataforma de contenedores utilizada para el despliegue
+Docker Compose	Orquestación de múltiples servicios
+Portainer	Gestión visual de contenedores y stacks
+MySQL 8.0	Sistema gestor de bases de datos
+PHP 8.2	Lenguaje de programación de la aplicación web
+Apache	Servidor web
+phpMyAdmin	Administración de la base de datos
+Funcionamiento del sistema
 
-Levantar un contenedor Nginx.
+El sistema está compuesto por tres contenedores que se comunican entre sí mediante una red Docker interna creada automáticamente por Docker Compose.
 
-Publicar la web en el puerto 8080.
+El contenedor web ejecuta Apache y PHP.
 
-Servir archivos estáticos del proyecto.
+El contenedor db ejecuta MySQL y expone el servicio internamente.
 
-6. Despliegue en Portainer
-El despliegue del proyecto se realiza siguiendo estos pasos:
+El contenedor phpmyadmin se conecta a la base de datos para su administración.
 
-Acceso a Portainer desde el navegador.
+La aplicación web se conecta a MySQL utilizando el nombre del servicio db como host, aprovechando la resolución DNS interna de Docker.
 
-Creación de un nuevo Stack.
+Persistencia de datos
 
-Pegado del archivo docker-compose.yml.
+Para garantizar que los datos no se pierdan al reiniciar los contenedores, se utiliza un volumen Docker:
 
-Despliegue del stack.
+pokemon_mysql_data
 
-Verificación de que el contenedor está en estado Running.
+Este volumen almacena los datos de MySQL en el host y permite que la información persista aunque los contenedores sean eliminados o recreados.
 
-7. Funcionamiento de la aplicación
-El funcionamiento de la aplicación es el siguiente:
+Inicialización de la base de datos
 
-El usuario accede a la web desde el navegador.
+La base de datos se inicializa automáticamente mediante el archivo init.sql, que se ejecuta en el primer arranque del contenedor MySQL.
 
-JavaScript realiza peticiones a la PokéAPI.
+Este script:
 
-La API devuelve los datos en formato JSON.
+Crea la base de datos pokemon.
 
-Los datos se muestran dinámicamente en pantalla.
+Crea la tabla pokedex.
 
-No se almacena información localmente.
+Inserta los 151 Pokémon correspondientes a la primera generación.
 
-8. Pruebas realizadas
-Durante el desarrollo se realizaron las siguientes pruebas:
+Despliegue con Portainer
 
-Acceso correcto a la web desde el navegador.
+El despliegue del proyecto se realiza mediante un stack en Portainer, lo que permite gestionar los servicios de forma visual.
 
-Carga correcta de datos desde la API.
+Portainer facilita:
 
-Visualización de imágenes de Pokémon.
+El control del estado de los contenedores.
 
-Funcionamiento sin base de datos.
+El acceso a logs.
 
-Persistencia del servicio tras reinicio del contenedor.
+La gestión de volúmenes y redes.
 
-9. Ventajas del uso de una API
-El uso de una API externa presenta varias ventajas:
+La modificación del stack sin utilizar la línea de comandos.
 
-No es necesario gestionar una base de datos.
+Justificación de decisiones técnicas
 
-Datos siempre actualizados.
+Se ha elegido Docker como tecnología principal debido a su portabilidad y facilidad de despliegue.
 
-Menor complejidad del backend.
+MySQL se utiliza como base de datos relacional por su estabilidad y uso extendido.
+PHP se ha seleccionado por su integración sencilla con MySQL.
+Portainer se emplea para simplificar la administración de contenedores.
 
-Escalabilidad sencilla.
+Limitaciones del proyecto
 
-Ideal para proyectos de demostración y aprendizaje.
+La aplicación web solo permite la visualización de datos.
 
-10. Problemas encontrados y soluciones
-Problema	Solución
-Puerto ocupado	Cambio de puerto en docker-compose.yml
-No cargaban datos	Verificación de la URL de la API
-Error de permisos	Uso de volúmenes en modo lectura
+No se implementa autenticación de usuarios.
 
-11. Conclusión
-El proyecto demuestra cómo desplegar una aplicación web moderna basada en una API externa utilizando Docker y Portainer.
+El diseño de la interfaz es básico.
 
-Este enfoque es eficiente, escalable y muy utilizado en entornos reales de desarrollo, especialmente cuando no se requiere almacenamiento local de datos.
+Estas limitaciones se deben a que el proyecto está enfocado en el despliegue y la infraestructura.
