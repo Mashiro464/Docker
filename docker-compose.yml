@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: pokemon_db
+    environment:
+      MYSQL_DATABASE: pokemon
+      MYSQL_USER: pokemonuser
+      MYSQL_PASSWORD: pokemonpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - pokemon_mysql_data:/var/lib/mysql
+      - /opt/pokemon-mysql/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3307:3306"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: /opt/pokemon-mysql
+    container_name: pokemon_web
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: pokemonuser
+      DB_PASSWORD: pokemonpass
+      DB_NAME: pokemon
+    volumes:
+      - /opt/pokemon-mysql/www:/var/www/html
+    ports:
+      - "8083:80"
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pokemon_phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "8084:80"
+    restart: unless-stopped
+
+volumes:
+  pokemon_mysql_data:
