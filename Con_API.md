@@ -52,20 +52,12 @@ pokedex/
 │   └── app.js
 └── docker-compose.yml
 ```
-Descripción de los archivos
-index.html: estructura principal de la web.
+---
 
-styles.css: diseño visual de la aplicación.
+## 5. Docker Compose
+Se utiliza un único servicio con **Nginx** para servir la aplicación web.
 
-app.js: lógica JavaScript para consumir la API.
-
-docker-compose.yml: definición del contenedor Nginx.
-
-5. Docker Compose
-Se utiliza un único servicio con Nginx para servir la aplicación web.
-
-yaml
-Copiar código
+```yaml
 version: "3.8"
 
 services:
@@ -129,7 +121,7 @@ El uso de una API externa presenta varias ventajas:
 
 No es necesario gestionar una base de datos.
 
-Los datos están siempre actualizados.
+Datos siempre actualizados.
 
 Menor complejidad del backend.
 
@@ -141,7 +133,7 @@ Ideal para proyectos de demostración y aprendizaje.
 Problema	Solución
 Puerto ocupado	Cambio de puerto en docker-compose.yml
 No cargaban datos	Verificación de la URL de la API
-Error de permisos	Uso correcto de volúmenes en modo lectura
+Error de permisos	Uso de volúmenes en modo lectura
 
 11. Conclusión
 El proyecto demuestra cómo desplegar una aplicación web moderna basada en una API externa utilizando Docker y Portainer.
