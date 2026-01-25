@@ -242,8 +242,7 @@ El despliegue se realiza desde Portainer creando un stack y cargando el archivo 
 - Revisar logs.
 
 - Reiniciar servicios.
-  
 
-Modificar el stack.
+- Modificar el stack.
 
-Gestionar volúmenes y redes.
+- Gestionar volúmenes y redes.
