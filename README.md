@@ -237,11 +237,12 @@ El despliegue se realiza desde Portainer creando un stack y cargando el archivo 
 
 ## 9. Mantenimiento
 
-Portainer permite:
+- Portainer permite:
 
-Revisar logs.
+- Revisar logs.
 
-Reiniciar servicios.
+- Reiniciar servicios.
+  
 
 Modificar el stack.
 
